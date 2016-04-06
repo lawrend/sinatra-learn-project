@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Maker 110</title>
+    <!--Styles-->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css">  
+
+    <style>
+      body {
+        margin: 10px;
+      }
+    </style>
+    
+  </head>
+  <body>
+
+      <%= yield %>
+
+<!-- jQuery via Google = local fallback, see h5bp.com -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.Jquery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script>
+
+<!-- Bootstrap jQuery Plugins, compiled and minified -->
+<script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

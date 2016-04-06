@@ -1,0 +1,9 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<h3>Choose One of the Following Options</h3>
+<ul>
+  <li><a href="/users/<%=@user.id%>/events">List</a> Events you made</li>
+  <li><a href="/users/<%=@user.id%>/participating">List</a> Events you are going to</li>
+  <li><a href="/events/new">Create</a> a new event</li>
+  <li><a href="/users/logout">Logout</a></li>
+</ul>

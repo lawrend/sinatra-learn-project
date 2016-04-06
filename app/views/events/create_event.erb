@@ -1,0 +1,31 @@
+<%if Helpers.is_logged_in?(session)%>
+      <%@user = Helpers.current_user(session)%>
+    <p>Welcome, <%=@user.username%>!</p>
+    <h3>Let's Make an Event</h3>
+      <form action '/events/new' method="POST">
+        <p>Event Name:<input type="string" name="name"></p>
+        <input type="hidden" name="user_id" value=<%=@user.id%>>
+        
+        <p>Details:<textarea rows="5" cols="60" name="details"></textarea></p>
+        <p>Anyone you want to invite?</p>
+        <%User.all.each do |guest|%>
+          <%if guest.username != @user.username%>
+            <input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"><%=guest.username%></input>
+          <%end%>
+        <%end%>
+        <br></br>
+        <p>---------------------------------------</p>
+        <p>Event Activities</p>
+        <%Activity.all.each do |activity|%>
+          <input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"><%=activity.name%></input>
+        <%end%>
+        <p>---------------------------------------</p>
+        <p>Create New Activity</p>
+          <input type="text" name="new_activity"></input>
+          <br></br>
+        <input type="submit"></input>
+      </form>
+<%else%>
+  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to make an event.</p>
+<%end%>  
+  
