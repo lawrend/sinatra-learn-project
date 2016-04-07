@@ -1,0 +1,12 @@
+<%if Helpers.is_logged_in?(session)%>
+  <%@current_user = Helpers.current_user(session)%>
+  <h3>Hey <%=@current_user.username%>! Here are your events:</h3>
+  <p>(Click for details or to edit/delete)</p>
+    <%@current_user.events.each do |event|%>
+      <h3><a href="/events/<%=event.id%>", style="color: #884488"><%=event.name%></a></h3>
+    <%end%>
+
+<p><a href="/users/<%=@current_user.id%>/homepage">Return to Homepage</a></p>
+<%else%>
+  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to view events.</p>
+<%end%> 

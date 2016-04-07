@@ -1,0 +1,28 @@
+<h1 style="color: #884488"><%=@event.name%></h1>
+<p>-----------------------</p>
+<h3 style="color: #ff1199">Details</h3>
+  <p><%=@event.details%></p>
+<p>-----------------------</p>
+<h3 style="color: #ff1199">Activities</h3>
+  <%@event.activities.each do |activity|%>
+    <p><%=activity.name%></p>
+  <%end%>
+<p>-----------------------</p>
+<h3 style="color: #ff1199">Participants</h3>
+<%if @event.users.empty? %>
+  <p>None</p>
+<%else%>
+  <%@event.users.all.each do |participant|%>
+    <p><%=participant.username%></p>
+  <%end%>
+<%end%>
+
+<form action="/events/<%=@event.id%>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Event" id="button"></form>
+
+
+<form action="/events/<%=@event.id%>/edit" method="get">
+    <input id="hidden" type="hidden" name="_method" value="get">
+    <input type="submit" value="Edit Event" id="button"></form>
+<p><a href="/users/<%=@event.user_id%>/homepage">Homepage</a></p>

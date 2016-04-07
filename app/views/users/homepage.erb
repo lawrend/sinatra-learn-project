@@ -1,6 +1,8 @@
+<%@user = Helpers.current_user(session)%>
+
 <h1>Welcome, <%=@user.username%></h1>
 
-<h3>Choose One of the Following Options</h3>
+<h3>Choose One of the Following Options:</h3>
 <ul>
   <li><a href="/users/<%=@user.id%>/events">List</a> Events you made</li>
   <li><a href="/users/<%=@user.id%>/participating">List</a> Events you are going to</li>

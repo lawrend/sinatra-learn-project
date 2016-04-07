@@ -43,11 +43,23 @@ class UsersController < ApplicationController
   end
 
   ### HOMEPAGE ###
-
   get '/users/:id/homepage' do
     @user = User.find(params[:id])
     erb :'/users/homepage'
   end
+
+  ### LIST A USER'S EVENTS ###
+  get '/users/:id/events' do 
+    @user = User.find(params[:id])
+    erb :'/users/events'
+  end
+
+  ### LIST EVENTS A USER IS ATTENDING ###
+  get '/users/:id/participating' do 
+    @user = User.find(params[:id])
+    erb :'/users/participating'
+  end
+
   
   ### LOGOUT ###
   get '/users/logout' do 

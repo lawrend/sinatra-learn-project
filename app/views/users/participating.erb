@@ -1,0 +1,17 @@
+
+<h3>Hey <%=@user.username%>! Here are the events you are attending:</h3>
+<%Participant.all.each do |participant|%>
+  <%event = Event.find(participant.event_id)%>
+  <%participant.users.each do |attendee|%>
+    <%if @user.username == attendee.username%>
+      <h3>Event</h3>
+      <h4 style="color: #884488"><%=event.name%></h4>
+      <h5 style="color: #ff1199">Details</h5>
+      <p><%=event.details%></p>
+      <h5 style="color: #ff1199">Organizer</h5>
+      <p><%=User.find(event.user_id).username%></p>
+      <p>-----------------------------</p>
+    <%end%>
+  <%end%>
+<%end%>
+<p><a href="/users/<%=@user.id%>/homepage">Return to Homepage</a></p>

@@ -1,0 +1,42 @@
+<%if Helpers.is_logged_in?(session)%>
+  <%@user = Helpers.current_user(session)%>
+    <h3>Let's change the things...</h3>
+<%else%>
+  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to change events.</p>
+<%end%> 
+
+<%if @user.id == @event.user_id%>
+  <form action '/events/<%=@event.id%>/edit' method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <p>Event Name:<input type="string" name="name" value="<%=@event.name%>"></p>
+    
+    <input type="hidden" name="user_id" value=<%=@user.id%>>
+        
+    <p>Details:<textarea rows="5" cols="60" name="details"><%=@event.details%></textarea></p>
+    
+    <p>Changing up the guest list?</p>
+        <%User.all.each do |guest|%>
+          <%if guest.username != @user.username%>
+            <input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"<%='checked' if @event.users.include?(guest)%>><%=guest.username%></input>
+          <%end%>
+        <%end%>
+        <br></br>
+        <p>---------------------------------------</p>
+        
+    <p>These still the activities?</p>
+        <%Activity.all.each do |activity|%>
+          <input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"<%='checked' if @event.activities.include?(activity)%>><%=activity.name%></input>
+        <%end%>
+        <p>---------------------------------------</p>
+
+    <p>Add a new activity if ya want</p>
+          <input type="text" name="new_activity"></input>
+          <br></br>
+        <input type="submit" value="Edit It Up"></input>
+      </form>
+<%else%>
+  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to edit an event.</p>
+<%end%>
+  
+
+
