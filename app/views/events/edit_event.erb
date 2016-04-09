@@ -1,7 +1,7 @@
 <%if Helpers.is_logged_in?(session)%>
   <%@user = Helpers.current_user(session)%>
   <div class="jumbotron">
-    <h2>Let's change things...</h2>
+    <h1 class="lead" style="color: #441144">Change things...</h1>
     <br></br>
 
     <%if @user.id == @event.user_id%>
@@ -14,23 +14,23 @@
         <p><textarea rows="5" cols="60" name="details"><%=@event.details%></textarea></p>
   </div>
   <div class="container">
-    <div class="col-sm-4">
-        <p class="lead">Changing up the guest list?</p>
+    <div class="col-sm-4" style="border-right: 1px solid #e5e5e5">
+        <p class="lead" style="color: #441144">Changing up the guest list?</p>
             <%User.all.each do |guest|%>
               <%if guest.username != @user.username%>
-                <input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"<%='checked' if @event.users.include?(guest)%>><%=guest.username%></input>
+                <p><input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"<%='checked' if @event.users.include?(guest)%>> <%=guest.username%></input></p>
               <%end%>
             <%end%>
     </div>
-    <div class="col-sm-4">
-        <p class="lead">Changing activities?</p>
+    <div class="col-sm-4" style="border-right: 1px solid #e5e5e5; border-left: 1px solid #e5e5e5">
+        <p class="lead" style="color: #441144">Changing activities?</p>
             <%Activity.all.each do |activity|%>
-              <input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"<%='checked' if @event.activities.include?(activity)%>><%=activity.name%></input>
+              <p><input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"<%='checked' if @event.activities.include?(activity)%>> <%=activity.name%></input></p>
             <%end%>
         <br></br>
     </div>
-    <div class="col-sm-4">
-        <p class="lead">Add a new activity if ya want</p>
+    <div class="col-sm-4" style="border-left: 1px solid #e5e5e5">
+        <p class="lead" style="color: #441144">Add a new activity if ya want</p>
           <input type="text" name="new_activity[]" placeholder="New Activity"></input>
           <br></br>
           <input type="text" name="new_activity[]" placeholder="New Activity"></input>

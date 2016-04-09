@@ -11,25 +11,24 @@
       <form action '/events/new' method="POST">
         <p><input type="string" name="name" placeholder="Event Name"></p>
         <input type="hidden" name="user_id" value=<%=@user.id%>>
-        
         <p><textarea rows="5" cols="60" name="details" placeholder="Event Details"></textarea></p>
 </div>
 <div class="container">
-  <div class="col-sm-6">
-        <h3 class="lead">Anyone you want to invite?</h3>
-        <%User.all.each do |guest|%>
-          <%if guest.username != @user.username%>
-            <input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"><%=guest.username%></input>
-          <%end%>
+  <div class="col-sm-3" style="border-right: 1px solid #e5e5e5">
+    <h3 class="lead">Anyone you want to invite?</h3>
+      <%User.all.each do |guest|%>
+        <%if guest.username != @user.username%>
+          <p><input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"> <%=guest.username%></input></p>
         <%end%>
-        <br></br>
-        <h3 class="lead">Choose Activities</h3>
-        <%Activity.all.each do |activity|%>
-          <input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"><%=activity.name%></input>
-        <%end%>
-        <br></br>
+      <%end%>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-3" style="border-right: 1px solid #e5e5e5; border-left: 1px solid #e5e5e5">
+    <h3 class="lead">Choose Activities</h3>
+      <%Activity.all.each do |activity|%>
+        <p><input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"> <%=activity.name%></input></p>
+      <%end%>
+  </div>
+  <div class="col-sm-6" style="border-left: 1px solid #e5e5e5">
     <h4 class="lead">Create a new activity?</h4>
       <div class="col-sm-6">
         <input type="text" name="new_activity[]" placeholder="New Activity"></input>
