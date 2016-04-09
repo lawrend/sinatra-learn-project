@@ -1,7 +1,7 @@
 # sinatra-learn-project
 
-This basic app lets registered users create events for themselves and other registered users, selecting from a list of activities or creating a new one.
+This basic app lets registered users create events for themselves and other registered users, selecting from a list of activities previously created activities or creating a new one.
 
-Invited users will be sent an email and notified when they log in to their accounts.
+Only the organizer can modify the details of the event or delete the event, but anyone can see the details of the events to which they are invited.
 
-Only the organizer can modify the details of the event.
+It's been coated in a basic base coat of bootstrap paint.
