@@ -5,7 +5,5 @@ class User < ActiveRecord::Base
   has_many :participants, through: :user_participants
   has_many :events
   has_many :activities, through: :participants
-  extend Slugifiable
-  include Slugifiable
 end
 

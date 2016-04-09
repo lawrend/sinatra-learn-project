@@ -2,7 +2,7 @@
   <%@current_user = Helpers.current_user(session)%>
     <%if @current_user.username == User.find(@event.user_id).username%>
     <div class="jumbotron">
-      <h1 class="lead" style="color: #223300"><%=@event.name%></h1>
+      <h1 class="lead" style="color: #441144"><%=@event.name%></h1>
     </div>
 
     <div class="row marketing">

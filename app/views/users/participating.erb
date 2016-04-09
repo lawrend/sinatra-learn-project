@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1 class="lead">Here are the events you are attending:</h1>
+  <h1 class="lead" style="color: #441144">Here are the events you are attending:</h1>
 </div>
 <div class="container">
 
@@ -11,22 +11,26 @@
     <%participant.users.each do |attendee|%>
       <%if @user.username == attendee.username%>
       <div class="container">
-        <div class="col-sm-6">
-          <h4 class="lead" style="color: #884488">Event</h4>
+        <div class="col-sm-4">
+          <h4 class="lead" style="color: #441144">Event</h4>
           <h4><%=event.name%></h4>
+        </div>
+        <div class="col-sm-4">
           <h4 class="lead" style="color: #884488">Organizer</h4>
           <h4><%=User.find(event.user_id).username%></h4>
-          <br></br>
         </div>
-        <div class="col-sm-6"> 
+        <div class="col-sm-4"> 
           <h4 class="lead" style="color: #ff1199">Details</h4>
           <p><%=event.details%></p>
-          <br></br>
+        
         </div>
       </div>
       <%end%>
     <%end%>
   <%end%>
 <%end%>
+</div>
+<div class="container">
+<br></br>
 <p><a class="btn btn-lg btn-primary" href="/users/<%=@user.id%>/homepage">Return to Homepage</a></p>
 </div>

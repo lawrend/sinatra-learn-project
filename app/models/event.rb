@@ -5,7 +5,5 @@ class Event < ActiveRecord::Base
   has_one :participant
   has_many :users, through: :participant
   belongs_to :user
-  extend Slugifiable
-  include Slugifiable
 
 end

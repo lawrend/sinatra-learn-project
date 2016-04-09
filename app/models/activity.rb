@@ -4,6 +4,4 @@ class Activity < ActiveRecord::Base
   has_many :events, through: :activity_events
   has_many :participants, through: :events
   has_many :users, through: :events
-  extend Slugifiable
-  include Slugifiable
 end

@@ -6,7 +6,7 @@
 
 <%if Helpers.is_logged_in?(session)%>
       <%@user = Helpers.current_user(session)%>
-    <h1 class="lead">Make Your New Event!</h1>
+    <h1 class="lead" style="color: #441144">Make Your New Event!</h1>
 
       <form action '/events/new' method="POST">
         <p><input type="string" name="name" placeholder="Event Name"></p>
@@ -30,26 +30,37 @@
         <br></br>
   </div>
   <div class="col-sm-6">
-      <h4 class="lead">Create a new activity!</h4>
-          <div class="col-sm-6">
-            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
-            <br></br>
+    <h4 class="lead">Create a new activity?</h4>
+      <div class="col-sm-6">
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
       
-            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
-            <br></br>
-          </div>
-          <div class="col-sm-6">
-            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
-            <br></br>
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
 
-            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
-            <br></br>
-          </div>
-        </div>
-  <div class="col-sm-12">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Make the Event!</button>
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
+
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
+
+        <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+        <br></br>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-sm-6">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Make the Event!</button>
       </form>
   </div>
+  <div class="col-sm-6">
+    <p><a class="btn btn-lg btn-primary btn-block" href="/users/<%=@user.id%>/homepage">Back to Homepage</a></p>
+  </div> 
 </div>
 <%else%>
   <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to make an event.</p>
