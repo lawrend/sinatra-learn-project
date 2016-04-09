@@ -1,30 +1,56 @@
+<div class="jumbotron">
+
+<% unless locals.empty? %>
+  <p><%=message%></p>
+<% end %>
+
 <%if Helpers.is_logged_in?(session)%>
       <%@user = Helpers.current_user(session)%>
-    <p>Welcome, <%=@user.username%>!</p>
-    <h3>Let's Make an Event</h3>
+    <h1 class="lead">Make Your New Event!</h1>
+
       <form action '/events/new' method="POST">
-        <p>Event Name:<input type="string" name="name"></p>
+        <p><input type="string" name="name" placeholder="Event Name"></p>
         <input type="hidden" name="user_id" value=<%=@user.id%>>
         
-        <p>Details:<textarea rows="5" cols="60" name="details"></textarea></p>
-        <p>Anyone you want to invite?</p>
+        <p><textarea rows="5" cols="60" name="details" placeholder="Event Details"></textarea></p>
+</div>
+<div class="container">
+  <div class="col-sm-6">
+        <h3 class="lead">Anyone you want to invite?</h3>
         <%User.all.each do |guest|%>
           <%if guest.username != @user.username%>
             <input type="checkbox" name="guest_ids[]" value="<%=guest.id%>"><%=guest.username%></input>
           <%end%>
         <%end%>
         <br></br>
-        <p>---------------------------------------</p>
-        <p>Event Activities</p>
+        <h3 class="lead">Choose Activities</h3>
         <%Activity.all.each do |activity|%>
           <input type="checkbox" name="activity_ids[]" value="<%=activity.id%>"><%=activity.name%></input>
         <%end%>
-        <p>---------------------------------------</p>
-        <p>Create New Activity</p>
-          <input type="text" name="new_activity"></input>
-          <br></br>
-        <input type="submit"></input>
+        <br></br>
+  </div>
+  <div class="col-sm-6">
+      <h4 class="lead">Create a new activity!</h4>
+          <div class="col-sm-6">
+            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+            <br></br>
+      
+            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+            <br></br>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+            <br></br>
+
+            <input type="text" name="new_activity[]" placeholder="New Activity"></input>
+            <br></br>
+          </div>
+        </div>
+  <div class="col-sm-12">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Make the Event!</button>
       </form>
+  </div>
+</div>
 <%else%>
   <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to make an event.</p>
 <%end%>  

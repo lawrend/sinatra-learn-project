@@ -1,28 +1,60 @@
-<h1 style="color: #884488"><%=@event.name%></h1>
-<p>-----------------------</p>
-<h3 style="color: #ff1199">Details</h3>
-  <p><%=@event.details%></p>
-<p>-----------------------</p>
-<h3 style="color: #ff1199">Activities</h3>
-  <%@event.activities.each do |activity|%>
-    <p><%=activity.name%></p>
-  <%end%>
-<p>-----------------------</p>
-<h3 style="color: #ff1199">Participants</h3>
-<%if @event.users.empty? %>
-  <p>None</p>
+<%if Helpers.is_logged_in?(session)%>
+  <%@current_user = Helpers.current_user(session)%>
+    <%if @current_user.username == User.find(@event.user_id).username%>
+    <div class="jumbotron">
+      <h1 class="lead" style="color: #223300"><%=@event.name%></h1>
+    </div>
+
+    <div class="row marketing">
+      <div class="col-sm-6">
+        <h3 class="lead" style="color: #ff1199">Details</h3>
+        <p><%=@event.details%></p>
+        <h3 class="lead" style="color: #ff1199">Guest List</h3>
+          <%if @event.users.empty? %>
+            <p>None</p>
+          <%else%>
+            <%@event.users.all.each do |participant|%>
+              <p><%=participant.username%></p>
+            <%end%>
+          <%end%>
+      </div>
+      <div class="col-sm-6">
+        <h3 class="lead" style="color: #ff1199">Activities</h3>
+        <%@event.activities.each do |activity|%>
+          <p><%=activity.name%></p>
+        <%end%>
+      </div>
+    </div>
+<div class="row marketing">
+  <div class="col-sm-4">
+      <!--DELETE BUTTON-->
+    <form action="/events/<%=@event.id%>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Delete Event</button>
+    </form>
+  </div>
+
+  <div class="col-sm-4">
+    <!--EDIT BUTTON-->
+    <form action="/events/<%=@event.id%>/edit" method="get">
+      <input id="hidden" type="hidden" name="_method" value="get">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Edit Event</button>
+    </form>
+  </div>
+  <div class="col-sm-4">
+    <!--HOMEPAGE LINK-->  
+    <p><a class="btn btn-lg btn-primary btn-block" href="/users/<%=@event.user_id%>/homepage">Return to Homepage</a></p>
+  </div>
+</div>
+  
+    
+    <%else%>
+      <div class="row marketing">
+        <div class "col-sm-12">
+          <p>This isn't showing up as your event.  Head back to your <a href="/users/<%=@current_user.id%>/homepage">homepage.</a></p>
+        </div>
+      </div>
+    <%end%>
 <%else%>
-  <%@event.users.all.each do |participant|%>
-    <p><%=participant.username%></p>
-  <%end%>
-<%end%>
-
-<form action="/events/<%=@event.id%>/delete" method="post">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Event" id="button"></form>
-
-
-<form action="/events/<%=@event.id%>/edit" method="get">
-    <input id="hidden" type="hidden" name="_method" value="get">
-    <input type="submit" value="Edit Event" id="button"></form>
-<p><a href="/users/<%=@event.user_id%>/homepage">Homepage</a></p>
+  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to make an event.</p>
+<%end%> 

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       session[:user_session_id] = @user.id
       redirect "/users/#{@user.id}/homepage"
     else
-      redirect "users/login"
+      erb :'failure'
     end
   end
 
@@ -32,14 +32,18 @@ class UsersController < ApplicationController
   end
 
   post '/users/new' do 
-    @user = User.new(username: params["username"], email: params["email"], password: params["password"])
-    #if !@user.username.empty? && !@user.email.empty? && @user.password != nil
-      @user.save
-      session[:user_session_id] = @user.id
-      redirect "/users/#{@user.id}/homepage"
-    #else
-     # redirect "/users/new"
-    #end
+    if User.find_by(username: params["username"]) != nil
+      erb :'/users/create_user', locals: {message: "Sorry, but that username is already taken."}
+    else
+      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+      if @user.save
+        @user.save
+        session[:user_session_id] = @user.id
+        redirect "/users/#{@user.id}/homepage"
+      else
+        erb :'failure'
+      end
+    end
   end
 
   ### HOMEPAGE ###

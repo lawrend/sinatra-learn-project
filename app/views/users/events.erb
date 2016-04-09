@@ -1,12 +1,29 @@
 <%if Helpers.is_logged_in?(session)%>
   <%@current_user = Helpers.current_user(session)%>
-  <h3>Hey <%=@current_user.username%>! Here are your events:</h3>
-  <p>(Click for details or to edit/delete)</p>
+<div class="jumbotron">
+  <%if @current_user.events.empty? %>
+    <h1 class="lead">You haven't made any Events yet!</h1>
+    <h3>Want to <a href="/events/new">make one now</a>?</h3>
+  <%else%>
+    <h1 class="lead">Events you made:</h1>
+    <p class="lead">(Click for details or to edit/delete)</p>
+  <%end%>
+</div>
+
+<div class="row marketing">
+  <div class="col-sm-12">
     <%@current_user.events.each do |event|%>
-      <h3><a href="/events/<%=event.id%>", style="color: #884488"><%=event.name%></a></h3>
+      <h2 class="lead"><a href="/events/<%=event.id%>"><%=event.name%></a></h2>
     <%end%>
 
-<p><a href="/users/<%=@current_user.id%>/homepage">Return to Homepage</a></p>
+    <p><a class="btn btn-lg btn-primary" href="/users/<%=@current_user.id%>/homepage">Return to Homepage</a></p>
+  </div>
+</div>
+
 <%else%>
-  <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to view events.</p>
+  <div class="row marketing">
+    <div class="col-sm-12">
+      <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to view events.</p>
+    </div>
+  </div>
 <%end%> 

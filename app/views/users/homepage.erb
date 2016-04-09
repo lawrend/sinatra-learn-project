@@ -1,11 +1,27 @@
-<%@user = Helpers.current_user(session)%>
+<%if Helpers.is_logged_in?(session)%>
+  <%@user = Helpers.current_user(session)%>
+<% unless locals.empty? %>
+  <p><%=message%></p>
+<%end%>
 
-<h1>Welcome, <%=@user.username%></h1>
+<div class="jumbotron">
+  <h1>Welcome, <%=@user.username%></h1>
+  
+  <p class="lead">Choose One of the Following Options:</p>
+</div>
 
-<h3>Choose One of the Following Options:</h3>
-<ul>
-  <li><a href="/users/<%=@user.id%>/events">List</a> Events you made</li>
-  <li><a href="/users/<%=@user.id%>/participating">List</a> Events you are going to</li>
-  <li><a href="/events/new">Create</a> a new event</li>
-  <li><a href="/users/logout">Logout</a></li>
-</ul>
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h3><a href="/users/<%=@user.id%>/events">List</a> Events you made</h3>
+    <h3><a href="/users/<%=@user.id%>/participating">List</a> Events you are going to</h3>
+  </div>
+  <div class="col-lg-6">
+    <h3><a href="/events/new">Create</a> a new event</h3>
+    <h3><a href="/users/logout">Logout</a></h3>
+  </div>
+</div>
+
+
+<%else%>
+  <h3>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a>.</h3>
+<%end%>

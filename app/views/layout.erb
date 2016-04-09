@@ -1,27 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>Event Maker 110</title>
     <!--Styles-->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css">  
+
+    <link rel="stylesheet" type="text/css" href="/css/signin.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
+   
 
     <style>
-      body {
-        margin: 10px;
-      }
     </style>
     
   </head>
   <body>
+  <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/users/logout">Logout</a></li>
+            <li role="presentation"><a href="/about">About</a></li>
+            <li role="presentation"><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Event Maker</h3>
+      </div>
 
-      <%= yield %>
+ <%= yield %>
 
-<!-- jQuery via Google = local fallback, see h5bp.com -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>window.Jquery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script>
+      
+    <footer class="footer">
+      <p>&copy; 2016 Know What You Mow, Inc.</p>
+    </footer>
+  </div> <!-- /container -->
 
-<!-- Bootstrap jQuery Plugins, compiled and minified -->
-<script src="/js/bootstrap.min.js"></script>
+
+
+     
+
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

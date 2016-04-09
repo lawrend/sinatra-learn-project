@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  validates_presence_of :name, :message => "needs to be filled in"
+  validates_presence_of :name
   has_many :activity_events
   has_many :activities, through: :activity_events
   has_one :participant
