@@ -42,7 +42,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Update the Info</button>
       </form>
     <%else%>
-      <p>Sorry, but you have to be the maker of an event to edit the event.  Head back to your <a href="users/<%=@user.id%>/homepage">homepage</a> and try again.</p>
+      <p>Sorry, but you have to be the maker of an event to edit the event.  Head back to your <a href="/users/<%=@user.id%>/homepage">homepage</a> and try again.</p>
     <%end%>
 <%else%>
   <p>Sorry, but you have to <a href="/users/new">register</a> or <a href="/users/login">login</a> to change events.</p>

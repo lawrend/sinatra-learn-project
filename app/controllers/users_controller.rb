@@ -59,9 +59,13 @@ class UsersController < ApplicationController
   end
 
   ### LIST EVENTS A USER IS ATTENDING ###
-  get '/users/:id/participating' do 
-    @user = User.find(params[:id])
-    erb :'/users/participating'
+  get '/users/:id/participating' do
+    if Helpers.is_logged_in?(session) 
+      @user = Helpers.current_user(session)
+      erb :'/users/participating'
+    else
+      redirect "/users/logout"
+    end
   end
 
   
