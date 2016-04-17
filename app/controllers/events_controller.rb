@@ -10,28 +10,33 @@ class EventsController < ApplicationController
     @event = Event.new(:name => params["name"], :user_id => params["user_id"], :details => params["details"])
     if @event.save
       @event.save
+
+      ### ADD CHECKBOX ACTIVITIES ###
       all_activities = params["activity_ids"]
         if all_activities != nil
           all_activities.each do |activity|
             @event.activities << Activity.find(activity)
           end
         end
-
+       ### ADD NEWLY LISTED ACTIVITIES ###
         @new_activities = params["new_activity"].delete_if{|e| e==""}
         if !@new_activities.empty?
           @new_activities.each do |activity|
             if Activity.find_by(name: activity) == nil
               @activity = Activity.new(:name => activity)
-              @event.activities << @activity 
+              @event.activities << @activity #<--creates new activity and adds it to event
             else
               if !@event.activities.include?(Activity.find_by(name: activity))
-                @event.activities << Activity.find_by(name: activity)
+                @event.activities << Activity.find_by(name: activity) 
+                #adds previously created activities to event w/o creating new activity
+                #i.e. adds activity that was listed but should have been checked
               end
             end
           end
         end
       
-      @participant = Participant.new(:event_id => @event.id)
+      ### ADD 'PARTICIPANT' - BAD NAME - THINK 'GUEST LIST' ###
+      @participant = Participant.new(:event_id => @event.id) 
       @participant.save
       all_guests = params["guest_ids"]
         if all_guests != nil
@@ -45,11 +50,8 @@ class EventsController < ApplicationController
     end
   end
 
-### LIST ALL EVENTS ###
-  get '/events/list' do
-  end
-
 ### LIST ONE EVENT ###
+  
   get '/events/:id' do 
     @event = Event.find(params[:id])
     erb :'/events/show'
@@ -106,6 +108,7 @@ class EventsController < ApplicationController
   end
 
 ### DELETE EVENT ###
+
   delete '/events/:id/delete' do
     if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)

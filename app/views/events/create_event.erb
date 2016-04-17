@@ -8,7 +8,7 @@
       <%@user = Helpers.current_user(session)%>
     <h1 class="lead" style="color: #441144">Make Your New Event!</h1>
 
-      <form action '/events/new' method="POST">
+      <form action "/events" method="POST">
         <p><input type="string" name="name" placeholder="Event Name"></p>
         <input type="hidden" name="user_id" value=<%=@user.id%>>
         <p><textarea rows="5" cols="60" name="details" placeholder="Event Details"></textarea></p>

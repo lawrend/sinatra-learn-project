@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/users/new' do 
+  post '/users' do 
     if User.find_by(username: params["username"]) != nil
       erb :'/users/create_user', locals: {message: "Sorry, but that username is already taken."}
     else
